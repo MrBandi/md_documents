@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Document Category Form View -->
+    <record id="view_document_category_form" model="ir.ui.view">
+        <field name="name">my.document.category.form</field>
+        <field name="model">my.document.category</field>
+        <field name="arch" type="xml">
+            <form string="Document Category">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Category Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="parent_id"/>
+                        <field name="sequence"/>
+                        <field name="color" widget="color_picker"/>
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Add a description..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Document Category Tree View -->
+    <record id="view_document_category_tree" model="ir.ui.view">
+        <field name="name">my.document.category.tree</field>
+        <field name="model">my.document.category</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list string="Document Categories">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="document_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Document Category Search View -->
+    <record id="view_document_category_search" model="ir.ui.view">
+        <field name="name">my.document.category.search</field>
+        <field name="model">my.document.category</field>
+        <field name="arch" type="xml">
+            <search string="Search Categories">
+                <field name="name" string="Category"/>
+                <field name="parent_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Parent Category" name="parent" domain="[]" context="{'group_by': 'parent_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Document Category Action -->
+    <record id="action_document_category" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="res_model">my.document.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_document_category_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new document category
+            </p>
+            <p>
+                Document categories help you organize your documents.
+            </p>
+        </field>
+    </record>
+</odoo>

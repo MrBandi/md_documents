@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="document_preview_template" name="Document Preview">
+        <t t-call="web.html_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="mt-4 mb-3"><t t-esc="document.name"/></h1>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <strong>Category:</strong> <t t-esc="document.category_id.name"/><br/>
+                                <strong>Author:</strong> <t t-esc="document.author_id.name"/><br/>
+                                <strong>Version:</strong> <t t-esc="document.version"/><br/>
+                                <strong>Last Updated:</strong> <t t-esc="document.date_updated"/>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="markdown-preview">
+                            <t t-raw="document.content_html"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

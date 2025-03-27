@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Document Form View -->
+    <record id="view_document_form" model="ir.ui.view">
+        <field name="name">my.document.form</field>
+        <field name="model">my.document</field>
+        <field name="arch" type="xml">
+            <form string="Document">
+                <header>
+                    <field name="version" string="Version" widget="badge" class="float-end" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button"
+                            icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                options="{'terminology': 'archive'}" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="code" readonly="1" style="width: 100%;" />
+                        </h1>
+                        <label for="name" class="oe_edit_only" />
+                        <h2>
+                            <field name="name" placeholder="Document Title" style="width: 100%;" />
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="category_id"
+                                options="{'no_create_edit': False, 'no_quick_create': False}" />
+                            <field name="tags" widget="many2many_tags"
+                                options="{'color_field': 'color'}" />
+                            <field name="author_id" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="date_created" />
+                            <field name="date_updated" />
+                            <field name="sequence" groups="base.group_no_one" />
+                        </group>
+                    </group>
+                    <div class="row mt-3">
+                        <div class="col-md-6" groups="md_documents.group_document_manager">
+                            <h5 class="mb-2">編輯內容</h5>
+                            <field name="content" placeholder="Write your document content..."
+                                class="h-100"
+                                options="{'collaborative': false, 'resizable': true, 'editor': true}"
+                                widget="html" />
+                        </div>
+                        <div class="col-md-6" groups="md_documents.group_document_manager">
+                            <h5 class="mb-2">內容預覽</h5>
+                            <div class="markdown-preview bg-white border rounded p-3">
+                                <field name="content_html" readonly="1" />
+                            </div>
+                        </div>
+                        <div class="col-12"
+                            groups="md_documents.group_document_user,base.group_user,-md_documents.group_document_manager">
+                            <h5 class="mb-2">文件內容</h5>
+                            <div class="bg-white border rounded p-3">
+                                <field name="content_html" readonly="1" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Document Tree View -->
+    <record id="view_document_tree" model="ir.ui.view">
+        <field name="name">my.document.tree</field>
+        <field name="model">my.document</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list string="Documents" decoration-muted="not active">
+                <field name="sequence" widget="handle" />
+                <field name="code" />
+                <field name="name" />
+                <field name="category_id" />
+                <field name="date_updated" />
+                <field name="version" />
+                <field name="active" invisible="1" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Document Search View -->
+    <record id="view_document_search" model="ir.ui.view">
+        <field name="name">my.document.search</field>
+        <field name="model">my.document</field>
+        <field name="arch" type="xml">
+            <search string="Search Documents">
+                <field name="code" string="Document Number" />
+                <field name="name" string="Document" />
+                <field name="category_id" />
+                <field name="tags" />
+                <field name="content" />
+                <filter string="My Documents" name="md_documents" domain="[('author_id', '=', uid)]" />
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]" />
+                <group expand="0" string="Group By">
+                    <filter string="Category" name="category" domain="[]"
+                        context="{'group_by': 'category_id'}" />
+                    <filter string="Created Date" name="date_created" domain="[]"
+                        context="{'group_by': 'date_created:month'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Document Action -->
+    <record id="action_document" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">my.document</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_document_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new document
+            </p>
+            <p>
+                Organize documents with categories, tags, and markdown content.
+            </p>
+        </field>
+    </record>
+</odoo>

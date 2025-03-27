@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_my_document_manager,my.document manager,model_my_document,md_documents.group_document_manager,1,1,1,1
+access_my_document_user,my.document user,model_my_document,md_documents.group_document_user,1,0,0,0
+access_my_document_employee,my.document employee,model_my_document,base.group_user,1,0,0,0
+access_my_document_category_manager,my.document.category manager,model_my_document_category,md_documents.group_document_manager,1,1,1,1
+access_my_document_category_user,my.document.category user,model_my_document_category,md_documents.group_document_user,1,0,0,0
+access_my_document_category_employee,my.document.category employee,model_my_document_category,base.group_user,1,0,0,0
+access_my_document_tag_manager,my.document.tag manager,model_my_document_tag,md_documents.group_document_manager,1,1,1,1
+access_my_document_tag_user,my.document.tag user,model_my_document_tag,md_documents.group_document_user,1,1,1,0
+access_my_document_tag_employee,my.document.tag employee,model_my_document_tag,base.group_user,1,0,0,0

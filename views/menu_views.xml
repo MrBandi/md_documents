@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_document_root"
+        name="Documents"
+        sequence="80"
+        web_icon="md_documents,static/description/icon.png" />
+
+    <!-- Document Menu Item -->
+    <menuitem id="menu_document"
+        name="Documents"
+        parent="menu_document_root"
+        action="action_document"
+        sequence="10" />
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_document_config"
+        name="Configuration"
+        parent="menu_document_root"
+        sequence="100"
+        groups="base.group_system" />
+
+    <!-- Categories Menu Item -->
+    <menuitem id="menu_document_category"
+        name="Categories"
+        parent="menu_document_config"
+        action="action_document_category"
+        sequence="10" />
+</odoo>
