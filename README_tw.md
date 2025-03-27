@@ -6,7 +6,7 @@
 
 <a id="chinese"></a>
 ### 模組概述
-此模組允許在 Odoo 中建立並管理 Markdown 格式的文件。它提供了完整的文件分類、標籤管理和版本控制功能。模組名稱為 `md_documents`，由 MrBandi 所開發。
+此模組允許在 Odoo 中建立並管理 Markdown 格式的文件。它提供了完整的文件分類、標籤管理和版本控制功能。模組名稱為 `md_documents`。
 
 ### 核心功能
 - 建立和管理 Markdown 格式文件
